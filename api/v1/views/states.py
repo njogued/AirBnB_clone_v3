@@ -9,7 +9,7 @@ from models import storage
 
 @app_views.route('/states', methods=['GET', 'POST'], strict_slashes=False)
 @app_views.route('/states/<state_id>',
-                methods=['GET', 'PUT', 'DELETE'], strict_slashes=False)
+                 methods=['GET', 'PUT', 'DELETE'], strict_slashes=False)
 def states(state_id=None):
     all_states = storage.all(State)
     state_list = [one_state.to_dict() for one_state in all_states.values()]
@@ -25,7 +25,6 @@ def states(state_id=None):
             new_state = State(**input_json)
             new_state.save()
             return jsonify(new_state.to_dict()), 201
-    
     if state_id:
         state_obj = storage.get(State, state_id)
         if state_obj is None:
