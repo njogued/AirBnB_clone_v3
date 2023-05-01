@@ -7,7 +7,9 @@ from models import storage
 from models.city import City
 from models.state import State
 
-@app_views.route('/states/<state_id>/cities', methods=['GET', 'POST'], strict_slashes=False)
+
+@app_views.route('/states/<state_id>/cities',
+                 methods=['GET', 'POST'], strict_slashes=False)
 def cities_in_state(state_id):
     state_obj = storage.get(State, state_id)
     if not state_obj:
@@ -28,7 +30,9 @@ def cities_in_state(state_id):
         new_city.save()
         return jsonify(new_city.to_dict()), 201
 
-@app_views.route('/cities/<city_id>', methods=['GET', 'PUT', 'DELETE'], strict_slashes=False)
+
+@app_views.route('/cities/<city_id>',
+                 methods=['GET', 'PUT', 'DELETE'], strict_slashes=False)
 def one_city(city_id):
     city_obj = storage.get(City, city_id)
     if not city_obj:
@@ -38,7 +42,7 @@ def one_city(city_id):
     elif request.method == "PUT":
         input_json = request.get_json()
         if not input_json:
-           abortt(404, 'Not a JSON')
+            abort(404, 'Not a JSON')
         city_obj.name = input_json["name"]
         city_obj.save()
         return jsonify(city_obj.to_dict()), 200
