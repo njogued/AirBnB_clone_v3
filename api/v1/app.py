@@ -27,6 +27,6 @@ def handle_404(e):
 
 if __name__ == "__main__":
     host = getenv('HBNB_API_HOST', default='0.0.0.0')
-    port = getenv('HBNB_API_PORT', default=50000)
+    port = getenv('HBNB_API_PORT', default=5000)
 
     app.run(host, port, threaded=True)
