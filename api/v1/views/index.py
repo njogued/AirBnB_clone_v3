@@ -10,12 +10,14 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+
 @app_views.route('/status', strict_slashes=False)
 def status():
     """Returns a JSON of status when queried"""
     return jsonify({"status": "OK"})
 
-@app.route('/api/v1/stats', strict_slashes=False)
+
+@app_views.route('/api/v1/stats', strict_slashes=False)
 def display_stats():
     classes = {"amenities": Amenity, "cities": City,
                "places": Place, "reviews": Review,
