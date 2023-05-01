@@ -71,20 +71,15 @@ class FileStorage:
 
     def get(self, cls, id):
         """A method that retrieves one object from the session"""
-        if cls not in classes.values():
-            return None
-        else:
-            all_classes = self.all(cls)
-            keys = [k for k, v in classes.items() if v == cls]
-            cls_id = keys[0] + '.' + id
-            if all_classes[cls_id]:
-                return all_classes[cls_id]
-            else:
-                return None
+        all_objs = self.all(cls)
+        for objs in all_objs.values():
+            if obj.id == id:
+                return obj
+        return None
 
     def count(self, cls=None):
         """A count method to count the number of objects"""
-        if cls is None or cls in classes.values():
+        if cls is None or cls in classes.values() or cls in classes.keys():
                 return len(self.all(cls))
         else:
             return None
