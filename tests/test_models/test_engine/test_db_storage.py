@@ -94,7 +94,7 @@ class TestGetandCount(unittest.TestCase):
 
     def test_get(self):
         """Testing get"""
-        new_state = State("Nairobi")
+        new_state = State(name="Nairobi")
         new_state.save()
         test_get_id = storage.get(State, new_state.id)
         self.assertEqual(test_get_id.id, new_state.id)
@@ -104,7 +104,7 @@ class TestGetandCount(unittest.TestCase):
     def test_count(self):
         """Testing the count method"""
         init_states = storage.count(State)
-        new_new_state = State("Kampala")
+        new_new_state = State(name="Kampala")
         new_new_state.save()
         final_states = storage.count(State)
         self.assertEqual(init_states + 1, final_states)
