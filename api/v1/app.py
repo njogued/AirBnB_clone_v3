@@ -20,7 +20,7 @@ def tear_all(exception=None):
 
 
 @app.errorhandler(404)
-def handle_404(e):
+def handle_404_errors(e):
     """Function to handle 404 error with a JSON formatted message"""
     return jsonify({"error": "Not found"}), 404
 
