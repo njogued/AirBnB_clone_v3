@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Using HTTP methods for places"""
-from api.vi.views import app_views
+from api.v1.views import app_views
 from models import storage
 from models.place import Place
 from models.city import City
@@ -15,9 +15,11 @@ def places_in_city(city_id):
         abort(404)
     if request.method == "GET":
         all_plcs = storage.all(Place)
-        plcs = [one.to_dict() if one.city_id == city_id
-                for one in all_plcs.values()]
-        return jsonify(places)
+        plcs = []
+        for one in all_plcs.values():
+            if one.city_id == city_id:
+                plcs.append(one.to_dict())
+        return jsonify(plcs)
     elif request.method == "POST":
         input_json = request.get_json()
         if not input_json:
